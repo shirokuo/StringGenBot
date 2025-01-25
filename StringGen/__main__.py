@@ -5,6 +5,7 @@ from pyrogram import idle
 
 from StringGen import LOGGER, Anony
 from StringGen.modules import ALL_MODULES
+from StringGen.modules import webserver  # Import web server
 
 
 async def anony_boot():
@@ -18,7 +19,7 @@ async def anony_boot():
         importlib.import_module("StringGen.modules." + all_module)
 
     LOGGER.info(f"@{Anony.username} Started.")
-    await idle()
+    await asyncio.gather(webserver.start_web_server(), idle())
 
 
 if __name__ == "__main__":
